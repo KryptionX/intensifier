@@ -7,7 +7,7 @@ Based on [vtbassmatt/intensifier](https://github.com/vtbassmatt/intensifier) by 
 ## Install
 
 ```bash
-git clone <this repo> intensifier && cd intensifier
+git clone git@github.com:KryptionX/intensifier.git && cd intensifier
 ./install.sh
 ```
 
