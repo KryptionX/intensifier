@@ -4,6 +4,8 @@ Turn any image into a Slack-ready "intensifies" emoji GIF. Web UI or CLI. macOS 
 
 Based on [vtbassmatt/intensifier](https://github.com/vtbassmatt/intensifier) by Matt Cooper (MIT), a shell script that does the classic shake. This is a ground-up rewrite with a UI, more effects and Slack size fitting.
 
+![Intensifier web UI: presets, shake controls, live preview and Slack size check](assets/UI-screenshot.png)
+
 ## Install
 
 ```bash
