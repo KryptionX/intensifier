@@ -1,0 +1,37 @@
+name: ci
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  test:
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - os: macos-latest        # ImageMagick 7 (`magick`) via Homebrew
+          - os: ubuntu-latest       # ImageMagick 6 (`convert`) via apt - the Linux fallback path
+          - os: ubuntu-latest       # ...and without gifsicle, since it's optional
+            no_gifsicle: true
+    runs-on: ${{ matrix.os }}
+    name: ${{ matrix.os }}${{ matrix.no_gifsicle && ' (no gifsicle)' || '' }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install deps (macOS)
+        if: runner.os == 'macOS'
+        run: brew bundle --file=Brewfile
+
+      - name: Install deps (Linux)
+        if: runner.os == 'Linux'
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y imagemagick librsvg2-bin webp
+          ${{ matrix.no_gifsicle && 'true' || 'sudo apt-get install -y gifsicle' }}
+
+      - name: Doctor
+        run: python3 intensify.py --doctor
+
+      - name: Smoke tests
+        run: python3 -m unittest discover -s tests -v

@@ -1,0 +1,13 @@
+# Python
+__pycache__/
+*.pyc
+
+# OS / editor
+.DS_Store
+.idea/
+.vscode/
+
+# Output you might generate while trying it out in the repo folder
+*-intensifies.gif
+*.zip
+/out/
